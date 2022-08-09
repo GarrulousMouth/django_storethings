@@ -1,0 +1,5 @@
+Даров
+{% if user.is_authenticated %}
+    {{ user.username }}
+    <a href="{% url 'logout' %}">Выход</a>
+{% endif %}
