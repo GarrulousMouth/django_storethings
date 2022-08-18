@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Продукт{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="product-image">
+                <img class="product-image__img" src="{{ product.image.url }}" alt="">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="product">
+                <h3 class="display-6">{{ product.name }}</h3>
+                <h4>{{ product.price }}&#x20bd</h4>
+                <p>{{ product.description }}</p>
+                <a href="#" class="btn btn-dark">Добавить в корзину</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
