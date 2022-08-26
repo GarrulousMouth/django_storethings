@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row gy-4 mb-5">
+      {% if favourite_products %}
+        {% for item in favourite_products %}
+        <div class="col-4">
+           
+            <div class="card">
+                <a href="{{item.get_url}}"><img class="card-img-top" src="{{item.image.url}}" alt="{{item.name}}"></a>
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">{{ item.description }}</p>
+                  <p class="card-text">{{ item.price }}&#x20bd</p>
+                  <a class="btn-card w-100 btn btn-dark mb-3" href="{% url 'cart_add' item.id %}">Добавить в корзину</a>
+                  <a href="{{item.get_url}}">Подробнее</a>
+                  <form action="{% url 'favourites_add' item.id %}" method="post">
+                    {% csrf_token %}
+                    
+                    <button class="btn-favourite">
+                    {% if item in favourite %}
+                    <i class="bi bi-bookmark-heart-fill"></i>
+
+                    {% else %}
+                    <i class="bi bi-bookmark-heart"></i>
+                    {% endif %}
+                    </button>
+                  </form>
+                </div>
+              </div>
+        </div>
+      {% endfor %}
+      {% else %}
+        <h2 class="display-3 text-center">У Вас нет избранных товаров</h2>
+      {% endif %}
+    </div>
+
+</div>
+
+
+{% endblock %}

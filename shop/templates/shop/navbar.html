@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-xl bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">UselessThings</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,9 +8,6 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Домой</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,12 +21,32 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a href="{% url 'favourites' %}" class="nav-link">Избранное</a>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                <p class="nav-link active mb-0">Ваша корзина:</p>
+                <a href="{% url 'cart_detail' %}" class="nav-link p-0">
+                    {{ total_items }} предмет{{ total_items|pluralize:",а" }},
+                    {{ cart.get_total_price }}&#x20bd
+                </a>
+            {% else %}
+              <p class="nav-link active mb-0">Ваша корзина пуста</p>
+            {% endif %}
+        {% endwith %}
           </li>
         </ul>
-        <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
-          <input name="search-product" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        {% if user.is_authenticated %}
+          <p class="nav-link active mb-0">{{ user.username }}</p>
+          <a class="btn btn-dark nav-link p-1 ms-2" href="{% url 'logout' %}"><em class="text-light">Выход</em></a>
+        {% else %}
+          <a class="btn btn-dark nav-link p-1 ms-2" href="{% url 'login' %}"><em class="text-light">Войти</em></a>
+
+        {% endif %}
+        <form class="d-flex ms-2" role="search" method="GET" action="{% url 'home' %}">
+          <input name="search-product" class="form-control me-2" type="search" placeholder="Что ищем..." aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Поиск</button>
         </form>
       </div>
     </div>

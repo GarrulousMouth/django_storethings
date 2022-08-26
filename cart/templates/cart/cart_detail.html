@@ -1,0 +1,64 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Ваша корзина</h1>
+        </div>
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Фотография</th>
+                    <th>Продукт</th>
+                    <th>Количество</th>
+                    <th>Цена за единицу</th>
+                    <th>Цена</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    {% with product=item.product %}
+                        <tr>
+                            <td>
+                                <div class="cart-img">
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img class="img-thumbnail" src="{{ product.image.url }}">
+                                    </a>
+                                </div>
+        
+                            </td>
+                            <td>{{ product.name }}</td>
+                            
+                            <td>
+                                <a class="text-decoration-none link-dark btn btn-dark text-light p-1" href="{% url 'cart_decrease' product.id %}"><</a>
+                                {{ item.quantity }}
+                                {% if item.quantity < product.stock %}
+                                <a class="text-decoration-none link-dark btn btn-dark text-light p-1" href="{% url 'cart_add' product.id %}">></a>
+                                {% endif %}
+                            </td>
+                            <td>{{ item.price }}&#x20bd</td>
+                            <td>{{ item.total_price }}&#x20bd</td>
+                            <td><a class="btn-close fs-4" aria-label="Close" href="{% url 'cart_remove' product.id%}"></a></td>
+                        </tr>
+                    {% endwith %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <div class="total pt-5">
+                <p class="display-6 fs-3 pe-5"><strong>Общая сумма: </strong>{{ cart.get_total_price }}&#x20bd</p>
+                <form action="" method="post">
+                    <input type="submit" class="btn btn-dark" value="Заказать">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

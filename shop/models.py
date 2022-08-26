@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -30,6 +31,8 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    favourites = models.ManyToManyField(User, related_name='favourites', blank=True)
+
 
     class Meta:
         ordering = ('name',)
