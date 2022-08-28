@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
+from django.contrib.auth.models import User
 from .models import Category, Product as ProductModel
 
 class HomeView(ListView):
@@ -25,3 +26,10 @@ class Product(DetailView):
         except Exception as e:
             raise e
         return render(request, 'shop/product.html', {'product': product})
+
+class PersonalAccount(TemplateView):
+
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        if request.user == user:
+            return render(request, 'shop/personal_account.html', {'user': user})

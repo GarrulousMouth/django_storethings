@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Продукт{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="card text-bg-light mb-3">
+                <a class="text-decoration-none text-dark" href="{% url 'orders' %}">
+                    <div class="card-body">
+                        <h5 class="card-title display-5">Посмотреть все <strong>заказы</strong></h5>
+                      </div>
+                </a>
+              </div>
+        </div>
+        <div class="col-4">
+            <div class="card text-bg-light mb-3">
+                <a class="text-decoration-none text-dark" href="{% url 'favourites' %}">
+                    <div class="card-body">
+                        <h5 class="card-title display-5">Заглянуть в <strong>избранное</strong></h5>
+                      </div> 
+                </a>
+              </div>
+        </div>
+        <div class="col-4">
+            <div class="card text-bg-light mb-3">
+                <a class="text-decoration-none text-dark" href="{% url 'password_change' %}">
+                    <div class="card-body">
+                        <h5 class="card-title display-5">Сменить <strong>пароль</strong></h5>
+                      </div> 
+                </a>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

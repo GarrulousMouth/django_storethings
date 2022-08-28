@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'favourites',
+    'orders',
     "crispy_forms",
     "crispy_bootstrap5",
 ]

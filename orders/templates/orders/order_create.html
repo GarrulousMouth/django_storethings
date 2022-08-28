@@ -1,0 +1,49 @@
+{% extends 'shop/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="text-center display-4">Оформление заказа</h3>
+        </div>
+        <div class="col-6">
+            {{ error }}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-dark mb-2">Сделать заказ</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="bg-secondary rounded-top p-2">
+                <h3 class="display-6 text-center text-white mb-3">Ваш заказ:</h3>
+                <ul>
+                    {% for item in cart %}
+                    <li class="text-white fs-5 mb-0">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="display-6 text-white fs-5">{{ item.quantity }}x</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="display-6 text-white text-end fs-5">{{ item.product.name }}</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-white text-end fs-5">{{ item.total_price }}&#x20bd</p>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+
+            </div>
+            <hr class="border border-dark border-5 mb-2 m-0">
+            <p class="display-5 text-end">Общая сумма: {{ cart.get_total_price }}&#x20bd</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

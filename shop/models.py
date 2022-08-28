@@ -10,8 +10,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
     def get_url(self):
         return reverse('products_by_category', args=[self.slug])
@@ -36,8 +36,8 @@ class Product(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'product'
-        verbose_name_plural = 'products'
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])

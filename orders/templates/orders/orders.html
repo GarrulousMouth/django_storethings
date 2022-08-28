@@ -1,0 +1,46 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-5">
+        {% for order in orders %}
+        <div class="col-12">
+            <h3 class="display-5 mb-4">Заказ №{{ order.id }} <em class="display-6 bg-dark text-white px-2 rounded">{% if order.finished %}Завершён{% else %}В процессе{% endif %}</em></h3>
+            <div class="row gy-4 mb-2">
+                {% for product in products %}
+                {% if product.order.id == order.id %}
+                <div class="col-4">
+                    <div class="card">
+                        <a href="{{product.product.get_url}}"><img class="card-img-top" src="{{product.product.image.url}}" alt="{{product.name}}"></a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <div class="row">
+                                <div class="col-5">
+                                    <p class="card-text fs-5">Цена: {{ product.price }}&#x20bd</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text fs-5">Количество: {{ product.quantity }}</p>  
+                                </div>
+                                <div class="col-12">
+                                    <p class="card-text fs-5">Общая цена: {{ product.get_cost }}&#x20bd</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <h3 class="mb-3 display-6 text-end">Сумма выкупа: <strong>{{ order.get_total_cost }}&#x20bd</strong></h3>
+            {% if not order.finished %}
+            <div class="finished-box text-end">
+                <a class="btn btn-dark fs-3" href="{% url 'order_finished' order.id %}">Завершить</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        </div>
+</div>
+{% endblock %}

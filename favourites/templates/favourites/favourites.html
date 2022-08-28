@@ -9,12 +9,18 @@
            
             <div class="card">
                 <a href="{{item.get_url}}"><img class="card-img-top" src="{{item.image.url}}" alt="{{item.name}}"></a>
-                <div class="card-body">
-                  <h5 class="card-title">{{ item.name }}</h5>
-                  <p class="card-text">{{ item.description }}</p>
-                  <p class="card-text">{{ item.price }}&#x20bd</p>
-                  <a class="btn-card w-100 btn btn-dark mb-3" href="{% url 'cart_add' item.id %}">Добавить в корзину</a>
-                  <a href="{{item.get_url}}">Подробнее</a>
+                <div class="card-body h-100 d-flex flex-column">
+                    <div class="product-description mb-3">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description|truncatechars:100 }}</p>
+                        <p class="card-text">{{ item.price }}&#x20bd</p>
+                    </div>
+                    <div class="buttons mt-auto">
+                        <a class="btn-card w-100 btn btn-dark mb-3" href="{% url 'cart_add' item.id %}">Добавить в корзину</a>
+                        <div class="link-favourite text-center fs-5">
+                            <a class="link-dark" href="{{item.get_url}}">Подробнее</a>
+                        </div>
+                    </div>
                   <form action="{% url 'favourites_add' item.id %}" method="post">
                     {% csrf_token %}
                     
@@ -32,7 +38,7 @@
         </div>
       {% endfor %}
       {% else %}
-        <h2 class="display-3 text-center">У Вас нет избранных товаров</h2>
+        <h2 class="display-3 text-center mb-5">У Вас нет избранных товаров</h2>
       {% endif %}
     </div>
 
