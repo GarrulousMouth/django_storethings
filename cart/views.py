@@ -3,7 +3,7 @@ from django.views.generic import CreateView, TemplateView
 from shop.models import Product
 from .cart import Cart
 
-# Create your views here.
+# Страница с корзиной
 class CartObject(TemplateView):
     template_name = 'cart/cart_detail.html'
 
@@ -11,6 +11,7 @@ class CartObject(TemplateView):
         cart = Cart(request)
         return render(request, self.template_name, {'cart': cart})
 
+# Добавление элементов в корзину
 class CartAdd(CreateView):
 
     def get(self, request, product_id):
@@ -19,6 +20,7 @@ class CartAdd(CreateView):
         cart.add(product=product)
         return redirect(request.META.get('HTTP_REFERER'))
 
+# Уменьше элементов в корзине
 class CartDecrease(TemplateView):
 
     def get(self, request, product_id):
@@ -27,7 +29,7 @@ class CartDecrease(TemplateView):
         cart.remove_elem(product=product)
         return redirect('cart_detail')
 
-
+# Полное удаление элемента из корзины
 class CartRemove(TemplateView):
     
     def get(self, request, product_id):

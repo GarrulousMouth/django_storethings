@@ -39,9 +39,10 @@
         </div>
     {% endfor %}
     </div>
+    {% if page_obj.has_other_pages %}
     <div class="row">
         <div class="col-12">
-            {% if page_obj.has_other_pages %}
+            
             <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
@@ -72,9 +73,10 @@
 
             </ul>
         </nav>
-            {% endif %}
+            
         </div>
     </div>
+    {% endif %}
 </div>
 
 

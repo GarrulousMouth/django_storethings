@@ -38,7 +38,7 @@
           </li>
         </ul>
         {% if user.is_authenticated %}
-          <p class="nav-link active"><a class="link-dark fs-4 me-2" href="{% url 'personal_account' user.username %}">{{ user.username }}</a></p>
+          <p class="nav-link active mb-lg-0"><a class="link-dark fs-4 me-2" href="{% url 'personal_account' user.username %}">{{ user.username }}</a></p>
           <a class="btn btn-dark nav-link p-1 m-sm-3 m-3 m-xl-0" href="{% url 'logout' %}"><em class="text-light">Выход</em></a>
         {% else %}
           <a class="btn btn-dark nav-link p-1 ms-2" href="{% url 'login' %}"><em class="text-light">Войти</em></a>

@@ -5,9 +5,11 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import Group, User
 from .forms import SugnUpForm
 
+# Регистрация
 class SignUp(CreateView):
     form_class = SugnUpForm
     template_name = 'registration/singup.html'
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form':form})
@@ -23,6 +25,7 @@ class SignUp(CreateView):
             return redirect('home')
         return render(request, self.template_name, {'form': form})
 
+# Вход
 class Login(FormView):
     form_class = AuthenticationForm
     template_name = 'registration/login.html'
@@ -43,7 +46,7 @@ class Login(FormView):
                 return redirect('signup')
         return render(request, self.template_name, {'form': form})
 
-
+# Выход
 class Logout(TemplateView):
 
     def get(self, request):

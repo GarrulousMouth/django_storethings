@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django import forms
 
+# Форма входа
 class SugnUpForm(UserCreationForm):
     class Meta:
         model = User
@@ -13,6 +14,8 @@ class SugnUpForm(UserCreationForm):
             raise forms.ValidationError('Данный email уже зарегистрирован')
         return email
 
+
+# Форма сброса пароля и проверка на существовании emaul
 class UserPasswordResetForm(PasswordResetForm):
     def clean_email(self):
         email = self.cleaned_data['email']
