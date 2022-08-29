@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from shop.views import PersonalAccount
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('favourites/', include('favourites.urls')),
     path('orders/', include('orders.urls')),
+    path('account/<str:username>', PersonalAccount.as_view(), name='personal_account'),
     path('', include('shop.urls')),
 ]
 

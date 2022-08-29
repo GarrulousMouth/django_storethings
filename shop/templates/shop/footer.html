@@ -1,20 +1,21 @@
 <footer class="mt-auto bg-dark py-4">
-    <div class="row">
-        <div class="col-3 offset-1">
+    <div class="row mw-100">
+        <div class="col-md-3 offset-md-1 col-12 text-center text-md-start mb-3 mb-md-0">
             <h3 class="text-white">UselessThings</h3>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-sm-12 text-center text-md-start mb-3 mb-md-0">
             <ul class="list-unstyled">
                 <li class="text-white"><strong>Контакты:</strong></li>
                 <li class="text-white">Адрес: улица Пушкина, дом Колотушкина</li>
                 <li class="text-white">Телефон: 8-800-000001</li>
             </ul>
         </div>
-        <div class="col-3 offset-1">
+        <div class="col-md-3 offset-md-1 col-sm-12 text-center text-md-start">
             <ul class="list-unstyled">
                 <li class="text-white"><strong>Навигация:</strong></li>
                 <li><a class="text-decoration-none text-white" href="{% url 'home' %}">Домой</a></li>
                 <li><a class="text-decoration-none text-white" href="{% url 'favourites' %}">Избранное</a></li>
+                <li><a class="text-decoration-none text-white" href="{% url 'personal_account' user.username %}">Личный кабинет</a></li>
             </ul>
         </div>
     </div>

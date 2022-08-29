@@ -5,7 +5,7 @@
     <div class="row gy-4 mb-5">
       {% if favourite_products %}
         {% for item in favourite_products %}
-        <div class="col-4">
+        <div class="col-lg-4 col-sm-6 col-12">
            
             <div class="card">
                 <a href="{{item.get_url}}"><img class="card-img-top" src="{{item.image.url}}" alt="{{item.name}}"></a>

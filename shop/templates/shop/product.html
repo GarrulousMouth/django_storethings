@@ -4,13 +4,13 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-6">
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-3">
             <div class="product-image">
-                <img class="product-image__img" src="{{ product.image.url }}" alt="">
+                <img class="product-image__img img-fluid" src="{{ product.image.url }}" alt="">
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-xl-5 offset-xl-1">
             <div class="product">
                 <h3 class="display-6">{{ product.name }}</h3>
                 <h4>{{ product.price }}&#x20bd</h4>
